@@ -5,6 +5,13 @@ module.exports.getCar = async function (req, res, next) {
     // Find one using the id sent in the parameter of the request
     let car = await CarModel.findOne({ _id: req.params.Id });
 
+    if (!car) {
+      return res.status(404).json({
+        success: false,
+        message: 'Car not found'
+      });
+    }
+
     res.json(car);
 
   } catch (error) {
@@ -19,7 +26,7 @@ module.exports.create = async function (req, res, next) {
     let car = req.body;
 
     // Insert into the DB
-    let result = await CarModel.create();
+    let result = await CarModel.create(car);
     console.log("Result: " + result);
 
     // Send a response
