@@ -3,7 +3,7 @@ let CarModel = require('../models/cars');
 module.exports.getCar = async function (req, res, next) {
   try {
     // Find one using the id sent in the parameter of the request
-    let car = await CarModel.findOne({ _id: req.params.carId });
+    let car = await CarModel.findOne({ _id: req.params.Id });
 
     res.json(car);
 
@@ -28,7 +28,7 @@ module.exports.create = async function (req, res, next) {
       {
         success: true,
         message: "Car created successfully.",
-        carId: result._id
+        Id: result._id
       }
     );
 
@@ -56,10 +56,10 @@ module.exports.update = async function (req, res, next) {
   try {
     // Get input from the request
     let updatedCar = CarModel(req.body);
-    updatedCar._id = req.params.carId;
+    updatedCar._id = req.params.Id;
 
     // Submit the change
-    let result = await CarModel.updateOne({ _id: req.params.carId }, updatedCar);
+    let result = await CarModel.updateOne({ _id: req.params.Id }, updatedCar);
     console.log("Result: " + result);
 
     // Handle the result: send a response.
