@@ -40,10 +40,7 @@ const CarSchema = new Schema(
 
 // Ensure virtual fields are serialised.
 CarSchema.set('toJSON', {
-  versionKey:false,
-  transform: function (doc, ret) { 
-    delete ret._id;
-  }
+  versionKey:false
 });
 
 module.exports = mongoose.model("Car", CarSchema);
